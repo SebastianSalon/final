@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Instalador</title>
+	<link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            min-height: 100vh;
+            padding-top: 50px; /* Espacio para el logo */
+            box-sizing: border-box;
+        }
+
+        .header {
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 20px;
+            box-sizing: border-box;
+            background-color: #e2e6ea;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            margin-bottom: 20px;
+        }
+
+        .header h1 {
+            font-size: 1.5rem;
+            color: #2c6e91;
+        }
+
+        .logout-button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            margin: 0;
+            transition: transform 0.2s;
+        }
+
+        .logout-button img {
+            width: 30px;
+            height: 30px;
+        }
+
+        .logout-button:hover {
+            transform: scale(1.1);
+        }
+
+        .container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            padding: 20px;
+            box-sizing: border-box;
+            max-width: 900px;
+        }
+
+        .button-container {
+            width: 150px;
+            height: 150px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+            background-color: #e2e6ea;
+        }
+
+        .button-container:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+        }
+
+        .button-container img {
+            width: 50px;
+            height: 50px;
+            margin-bottom: 10px;
+        }
+
+        .button-container span {
+            font-size: 1rem;
+            font-weight: bold;
+            color: #555;
+        }
+
+        .logo-container {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .logo {
+            width: 150px;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="logo-container">
+        <img src="/img/logo.png" alt="Logo" class="logo"> <!-- Reemplaza con la ruta de tu logo -->
+    </div>
+
+    <div class="header">
+        <h1 th:text="${mensaje}">Hola Instalador</h1>
+		<button class="Btn" onclick="location.href='/'">
+				           <div class="sign">
+				               <svg viewBox="0 0 512 512"><path d="M377.9 105.9L500.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L377.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1-128 0c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM160 96L96 96c-17.7 0-32 14.3-32 32l0 256c0 17.7 14.3 32 32 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32l-64 0c-53 0-96-43-96-96L0 128C0 75 43 32 96 32l64 0c17.7 0 32 14.3 32 32s-14.3 32-32 32z"></path></svg>
+				           </div>
+				           <div class="text">Logout</div>
+				       </button>
+    </div>
+    
+    <div class="container">
+        <div class="button-container" onclick="location.href='/productos'">
+            <img src="/img/prod.png" alt="Ver Productos">
+            <span>Ver Productos</span>
+        </div>
+        <div class="button-container" onclick="location.href='/clientes'">
+            <img src="/img/clie.png" alt="Ver Clientes">
+            <span>Ver Clientes</span>
+        </div>
+        <div class="button-container" onclick="location.href='/verCitas'">
+            <img src="/img/cita.png" alt="Ver Citas">
+            <span>Ver Citas</span>
+        </div>
+    </div>
+</body>
+</html>

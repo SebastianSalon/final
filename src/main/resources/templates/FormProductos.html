@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Producto</title>
+    <style>
+        body {
+            background-color: #d7dbdd;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2874a6;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a5276;
+        }
+
+        .error-message {
+            color: red;
+            font-size: 12px;
+            margin-top: 5px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="form-container">
+        <h1>Crear Producto</h1>
+        <form th:action="@{/productos/guardar}" th:object="${producto}" method="post">
+            <div class="form-group">
+                <label for="id">ID:</label>
+                <input type="text" th:field="*{id}" placeholder="ID" required/>
+            </div>
+
+            <div class="form-group">
+                <label>Nombre:</label>
+                <input type="text" th:field="*{nombre}" placeholder="Nombre del producto" />
+                <div th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="proveedor">Proveedor:</label>
+                <select th:field="*{proveedor.id}" id="proveedor">
+                    <option value="" disabled selected>Seleccione un Proveedor</option>
+                    <option th:each="proveedor : ${proveedor}" th:value="${proveedor.id}" th:text="${proveedor.nombre}"></option>
+                </select>
+                <div th:if="${#fields.hasErrors('proveedor')}" th:errors="*{proveedor}" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label for="categoria">Categoría:</label>
+                <select th:field="*{categoria.id}" id="categoria">
+                    <option value="" disabled selected>Seleccione una Categoría</option>
+                    <option th:each="categoria : ${categoria}" th:value="${categoria.id}" th:text="${categoria.categoria}"></option>
+                </select>
+                <div th:if="${#fields.hasErrors('categoria')}" th:errors="*{categoria}" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Precio Compra:</label>
+                <input type="number" step="0.01" th:field="*{precioCompra}" placeholder="Precio de compra" />
+                <div th:if="${#fields.hasErrors('precioCompra')}" th:errors="*{precioCompra}" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Precio Venta:</label>
+                <input type="number" step="0.01" th:field="*{precioVenta}" placeholder="Precio de venta" />
+                <div th:if="${#fields.hasErrors('precioVenta')}" th:errors="*{precioVenta}" class="error-message"></div>
+            </div>
+
+            <div class="form-group">
+                <label>Stock:</label>
+                <input type="number" th:field="*{stock}" placeholder="Cantidad en stock" />
+                <div th:if="${#fields.hasErrors('stock')}" th:errors="*{stock}" class="error-message"></div>
+            </div>
+
+            <button type="submit">Crear Producto</button>
+        </form>
+		
+		<button class="back-button" onclick="window.history.back();">Volver</button>
+        <div th:if="${error}" th:text="${error}" class="error-message"></div>
+    </div>
+
+</body>
+</html>

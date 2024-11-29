@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Inicio de Sesión</title>
+    <link rel="stylesheet" href="/css/styles.css"> 
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+        }
+
+        .main-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .logo {
+            width: 200px; /* Ajusta el tamaño del logo */
+            height: auto;
+            margin-bottom: 10px; /* Espacio entre el logo y el formulario */
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #e2e6ea;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            width: 320px;
+            position: relative;
+            z-index: 1; /* Para asegurar que el formulario esté sobre el fondo */
+        }
+
+        h2 {
+            text-align: center;
+            color: #2c6e91;
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        label {
+            width: 100%;
+            text-align: left;
+            font-weight: bold;
+            color: #555;
+            margin-bottom: 5px;
+            font-size: 0.9rem;
+        }
+
+        .input-container {
+            width: 100%;
+            position: relative;
+            margin-bottom: 15px;
+        }
+
+        .input-container input {
+            width: 100%;
+            padding: 10px 10px 10px 40px; /* Ajusta el padding para dar espacio a la imagen */
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+			font-size: 1rem;
+        }
+
+        .input-container .icon {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-15%);
+            width: 24px;
+            height: 24px;
+        }
+
+        .login-button {
+            width: 100%;
+            padding: 10px;
+            background-color: #2c6e91;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .login-button:hover {
+            background-color: #1f4f66;
+        }
+
+        .error-message {
+            color: red;
+            text-align: center;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="main-container">
+        
+        <img src="/img/logo.png" alt="Logo" class="logo"> 
+
+       
+        <div class="form-container">
+            <h2>Iniciar Sesion</h2> 
+
+            <form action="/login" method="post">
+                <div class="input-container">
+                    <label for="usuario">Usuario</label>
+                    <img src="/img/usu.png" class="icon" alt="Icono del usuario">
+                    <input type="text" id="usuario" name="usuario" placeholder="Ingresa tu usuario" required>
+                </div>
+
+                <div class="input-container">
+                    <label for="contraseña">Contraseña</label>
+                    <img src="/img/contra.png" class="icon" alt="Icono de contraseña">
+                    <input type="password" id="contraseña" name="contraseña" placeholder="Ingresa tu contraseña" required>
+                </div>
+
+                <button type="submit" class="login-button">Ingresar</button>
+            </form>
+
+            <p class="error-message" th:text="${error}"></p>
+        </div>
+    </div>
+</body>
+</html>
