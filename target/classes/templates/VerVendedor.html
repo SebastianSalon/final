@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Empleados</title>
+    <link rel="stylesheet" href="/styles.css">
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #d7dbdd;
+            font-family: Arial, sans-serif;
+        }
+
+        .container {
+            background-color: #e5e7e9;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 1000px;
+            width: 100%;
+            text-align: center;
+        }
+
+        h1 {
+            font-size: 36px;
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        table, th, td {
+            border: 1px solid #ccc;
+            padding: 10px;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2874a6;
+            color: white;
+            font-weight: bold;
+        }
+
+        td {
+            font-size: 16px;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 18px;
+            cursor: pointer;
+            text-decoration: none;
+            color: white;
+            background-color: #2874a6;
+            border: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            margin-top: 20px;
+        }
+
+        .btn:hover {
+            background-color: #0056b3;
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 5px;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .action-buttons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+        }
+
+        .action-buttons svg {
+            width: 24px;
+            height: 24px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Lista de Empleados</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>Primer Nombre</th>
+                    <th>Segundo Nombre</th>
+                    <th>Primer Apellido</th>
+                    <th>Segundo Apellido</th>
+                    <th>Cédula</th>
+                    <th>Celular</th>
+                    <th>Dirección</th>
+                    <th>Usuario</th>
+                    <th>Contraseña</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="vendedor : ${obtenerVendedor}"  th:if="${vendedor.tipousuario == 'vendedor'  || vendedor.tipousuario == 'instalador'}">
+                    <td th:text="${vendedor.primernombre}"></td>
+                    <td th:text="${vendedor.segundonombre}"></td>
+                    <td th:text="${vendedor.primerapellido}"></td>
+                    <td th:text="${vendedor.segundoapellido}"></td>
+                    <td th:text="${vendedor.cedula}"></td>
+                    <td th:text="${vendedor.celular}"></td>
+                    <td th:text="${vendedor.direccion}"></td>
+                    <td th:text="${vendedor.usuario}"></td>
+                    <td th:text="${vendedor.contraseña}"></td>
+					
+									<td class="action-buttons">
+									    <!-- Botón de Editar -->
+									    <button class="edit-button" th:onclick="'window.location.href=\'/empleados/editar/' + ${vendedor.id} + '\';'">
+									        <svg class="edit-svgIcon" viewBox="0 0 512 512">
+									            <path d="M410.3 231l11.3-11.3-33.9-33.9-62.1-62.1L291.7 89.8l-11.3 11.3-22.6 22.6L58.6 322.9c-10.4 10.4-18 23.3-22.2 37.4L1 480.7c-2.5 8.4-.2 17.5 6.1 23.7s15.3 8.5 23.7 6.1l120.3-35.4c14.1-4.2 27-11.8 37.4-22.2L387.7 253.7 410.3 231zM160 399.4l-9.1 22.7c-4 3.1-8.5 5.4-13.3 6.9L59.4 452l23-78.1c1.4-4.9 3.8-9.4 6.9-13.3l22.7-9.1v32c0 8.8 7.2 16 16 16h32zM362.7 18.7L348.3 33.2 325.7 55.8 314.3 67.1l33.9 33.9 62.1 62.1 33.9 33.9 11.3-11.3 22.6-22.6 14.5-14.5c25-25 25-65.5 0-90.5L453.3 18.7c-25-25-65.5-25-90.5 0zm-47.4 168l-144 144c-6.2 6.2-16.4 6.2-22.6 0s-6.2-16.4 0-22.6l144-144c6.2-6.2 16.4-6.2 22.6 0s6.2 16.4 0 22.6z"></path>
+									        </svg>
+									    </button>
+
+									    <!-- Botón de Eliminar -->
+										        <button class="bin-button" 
+										                th:onclick="'confirmDelete(' + ${vendedor.id} + ')'">
+										            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 39 7" class="bin-top">
+										                <line stroke-width="4" stroke="white" y2="5" x2="39" y1="5"></line>
+										                <line stroke-width="3" stroke="white" y2="1.5" x2="26.0357" y1="1.5" x1="12"></line>
+										            </svg>
+										            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 33 39" class="bin-bottom">
+										                <mask fill="white" id="path-1-inside-1_8_19">
+										                    <path d="M0 0H33V35C33 37.2091 31.2091 39 29 39H4C1.79086 39 0 37.2091 0 35V0Z"></path>
+										                </mask>
+										                <path mask="url(#path-1-inside-1_8_19)" fill="white" d="M0 0H33H0ZM37 35C37 39.4183 33.4183 43 29 43H4C-0.418278 43 -4 39.4183 -4 35H4H29H37ZM4 43C-0.418278 43 -4 39.4183 -4 35V0H4V35V43ZM37 0V35C37 39.4183 33.4183 43 29 43V35V0H37Z"></path>
+										                <path stroke-width="4" stroke="white" d="M12 6L12 29"></path>
+										                <path stroke-width="4" stroke="white" d="M21 6V29"></path>
+										            </svg>
+										            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 89 80" class="garbage">
+										                <path fill="white" d="M20.5 10.5L37.5 15.5L42.5 11.5L51.5 12.5L68.75 0L72 11.5L79.5 12.5H88.5L87 22L68.75 31.5L75.5066 25L86 26L87 35.5L77.5 48L70.5 49.5L80 50L77.5 71.5L63.5 58.5L53.5 68.5L65.5 70.5L45.5 73L35.5 79.5L28 67L16 63L12 51.5L0 48L16 25L22.5 17L20.5 10.5Z"></path>
+										            </svg>
+										        </button>
+										    </div>
+										</td>
+
+										<script>
+										    function confirmDelete(vendedorId) {
+										        if (confirm('¿Está seguro de que desea eliminar este vendedor?')) {
+										            window.location.href = '/empleados/eliminar/' + vendedorId;
+										        }
+										    }
+										</script>
+									<style>
+										
+										
+										/* Contenedor de los botones */
+										.action-buttons {
+										    display: flex;
+										    gap: 5px;
+										    justify-content: center;
+										    align-items: center;
+										    position: relative; /* Permite la posición absoluta de los botones internos */
+										}
+
+										/* Botón Eliminar en estado normal */
+										.bin-button {
+										    transition: opacity 0.3s ease-out, visibility 0s 0.3s; /* Añadimos un delay a la visibilidad */
+										}
+
+										/* Botón de Eliminar en estado transparente */
+										.edit-button:hover + .bin-button {
+										    opacity: 0;
+										    visibility: hidden;
+										    position: absolute; /* Permite que el botón de Editar lo cubra */
+										    pointer-events: none; /* Evita que el botón de Eliminar reciba eventos del cursor */
+										}
+
+										
+										
+
+									    .edit-button, .bin-button {
+									        background-color: transparent;
+									        border: none;
+									        cursor: pointer;
+									        padding: 0;
+									        margin: 0;
+									    }
+
+									    .edit-button svg, .bin-button svg {
+									        width: 24px; /* Ajusta el tamaño de los íconos */
+									        height: 24px;
+									    }
+									</style>
+									
+					              </tr>
+					          </tbody>
+					      </table>
+					<td>
+						<button class="invert-btn" onclick="window.history.back();">
+						    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512">
+						        <path fill="#000" d="M273.9 448.7L302.6 420l-106-106H480c17.7 0 32-14.3 32-32s-14.3-32-32-32H196.6l106-106-28.7-28.7c-6.2-6.2-16.4-6.2-22.6 0L71 238.6c-6.2 6.2-6.2 16.4 0 22.6L251.3 440.9c6.2 6.2 16.4 6.2 22.6 0z"></path>
+						    </svg>
+						    Volver
+						</button>
+						
+						<!-- Botón "Crear Nuevo Producto" -->
+						<button class="invert-btn create-btn" onclick="window.location.href='/empleados/crear';">
+						    Crear Nuevo Empleado
+						    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 512 512">
+						        <path fill="currentColor" d="M238.1 63.3L209.4 92l106 106H32c-17.7 0-32 14.3-32 32s14.3 32 32 32h283.4l-106 106 28.7 28.7c6.2 6.2 16.4 6.2 22.6 0L441 273.4c6.2-6.2 6.2-16.4 0-22.6L260.7 71.1c-6.2-6.2-16.4-6.2-22.6 0z"></path>
+						    </svg>
+						</button>
+					     </td>
+    </div>
+    <script>
+        function confirmDelete(usuarioId) {
+            if (confirm('¿Está seguro de que desea eliminar este empleado?')) {
+                window.location.href = '/empleados/eliminar/' + usuarioId;
+            }
+        }
+    </script>
+</body>
+</html>

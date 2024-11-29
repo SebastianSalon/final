@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Proveedor</title>
+    <style>
+        body {
+            background-color: #d7dbdd;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .form-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #2874a6;
+            margin-bottom: 20px;
+        }
+
+        label {
+            font-weight: bold;
+            display: block;
+            margin-bottom: 5px;
+            text-align: left;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+
+        select {
+            cursor: pointer;
+        }
+
+        button {
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            background-color: #2874a6;
+            color: #fff;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background-color 0.3s ease;
+        }
+
+        button:hover {
+            background-color: #1a5276;
+        }
+
+        .back-button {
+            margin-top: 15px;
+            background-color: #ccc;
+            color: #333;
+        }
+
+        .back-button:hover {
+            background-color: #999;
+        }
+    </style>
+</head>
+<body>
+    <div class="form-container">
+        <h1 th:text="${#strings.isEmpty(proveedor.id) ? 'Crear Proveedor' : 'Editar Proveedor'}"></h1>
+        <form th:action="@{/proveedor/guardar}" th:object="${proveedor}" method="post">
+			<div class="form-group">
+			     <label for="id">ID:</label>
+			     <input type="text" th:field="*{id}" placeholder="ID" required/>
+			 </div>
+            <div class="form-group">
+                <label for="nombre">Nombre</label>
+                <input type="text" id="nombre" th:field="*{nombre}" placeholder="Nombre del proveedor" required />
+            </div>
+            <div class="form-group">
+                <label for="telefono">Teléfono</label>
+                <input type="text" id="telefono" th:field="*{telefono}" placeholder="Teléfono del proveedor" required />
+            </div>
+            <div class="form-group">
+                <label for="direccion">Dirección</label>
+                <input type="text" id="direccion" th:field="*{direccion}" placeholder="Dirección del proveedor" required />
+            </div>
+            <div class="form-group">
+                <label for="email">Email</label>
+                <input type="email" id="email" th:field="*{email}" placeholder="Correo electrónico del proveedor" required />
+            </div>
+            <div class="form-group">
+                <label for="estado">Estado</label>
+                <select id="estado" th:field="*{estado}" required>
+                    <option value="">Seleccione</option>
+                    <option value="Activo">Activo</option>
+                    <option value="Inactivo">Inactivo</option>
+                </select>
+            </div>
+            <button type="submit">Guardar</button>
+        </form>
+        <button class="back-button" onclick="window.history.back();">Volver</button>
+    </div>
+</body>
+</html>

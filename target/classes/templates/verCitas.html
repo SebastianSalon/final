@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Ver Citas</title>
+    <style>
+        body {
+            background-color: #d7dbdd;
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .table-container {
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: 80%;
+            max-width: 600px;
+        }
+
+        h1 {
+            color: #2874a6;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            margin-top: 20px;
+        }
+
+        th, td {
+            padding: 12px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        th {
+            background-color: #2874a6;
+            color: white;
+        }
+
+        td {
+            background-color: #f8f9f9;
+        }
+
+        a {
+            display: inline-block;
+            margin-top: 20px;
+            padding: 10px 20px;
+            background-color: #2874a6;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+
+        a:hover {
+            background-color: #1a5276;
+        }
+    </style>
+</head>
+<body>
+    <div class="table-container">
+        <h1>Lista de Citas</h1>
+        <table>
+            <thead>
+                <tr>
+                    <th>ID Cita</th>
+                    <th>Producto</th>
+                    <th>Fecha Entrada</th>
+                    <th>Fecha Salida</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>1</td>
+                    <td>Bombillo H4</td>
+                    <td>2024-11-28 09:00</td>
+                    <td>2024-11-29 18:00</td>
+                </tr>
+            </tbody>
+        </table>
+        <a href="/productos">Volver a Productos</a>
+    </div>
+</body>
+</html>

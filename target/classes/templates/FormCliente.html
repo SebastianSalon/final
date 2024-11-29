@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Formulario Cliente</title>
+	<style>
+	    body {
+	        background-color: #d7dbdd;
+	        font-family: Arial, sans-serif;
+	        margin: 0;
+	        padding: 0;
+	        display: flex;
+	        justify-content: center;
+	        align-items: center;
+	        min-height: 100vh;
+	        box-sizing: border-box;
+	    }
+
+	    .form-container {
+	        background-color: #fff;
+	        padding: 20px;
+	        border-radius: 8px;
+	        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	        width: 90%; /* Ajuste responsivo */
+	        max-width: 500px; /* Limita el ancho máximo */
+	        box-sizing: border-box;
+	    }
+
+	    h1 {
+	        color: #2874a6;
+	        text-align: center;
+	        margin-bottom: 20px;
+	    }
+
+	    label {
+	        font-weight: bold;
+	        display: block;
+	        margin-bottom: 5px;
+	        text-align: left;
+	    }
+
+	    .form-group {
+	        margin-bottom: 15px;
+	    }
+
+	    input[type="text"],
+	    input[type="password"],
+	    input[type="email"],
+	    select {
+	        width: 100%;
+	        padding: 10px;
+	        border: 1px solid #ccc;
+	        border-radius: 5px;
+	        box-sizing: border-box;
+	    }
+
+	    select {
+	        cursor: pointer;
+	    }
+
+	    button {
+	        padding: 10px 20px;
+	        border: none;
+	        border-radius: 5px;
+	        background-color: #2874a6;
+	        color: #fff;
+	        cursor: pointer;
+	        font-size: 16px;
+	        width: 100%;
+	        transition: background-color 0.3s ease;
+	    }
+
+	    button:hover {
+	        background-color: #1a5276;
+	    }
+
+	    .back-button {
+	        margin-top: 15px;
+	        background-color: #ccc;
+	        color: #333;
+	    }
+
+	    .back-button:hover {
+	        background-color: #999;
+	    }
+	</style>
+
+</head>
+<body>
+    <div class="form-container">
+
+		<form th:action="@{/clientes/guardar}" th:object="${cliente}" method="post">
+		    <!-- Campo oculto para el ID -->
+		    <input type="hidden" th:field="*{id}" />
+
+		    <div class="form-group">
+		        <label for="primernombre">Primer Nombre:</label>
+		        <input type="text" th:field="*{primernombre}" placeholder="Primer Nombre" required />
+		        <div th:if="${#fields.hasErrors('primernombre')}" th:errors="*{primernombre}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="segundonombre">Segundo Nombre:</label>
+		        <input type="text" th:field="*{segundonombre}" placeholder="Segundo Nombre" />
+		        <div th:if="${#fields.hasErrors('segundonombre')}" th:errors="*{segundonombre}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="primerapellido">Primer Apellido:</label>
+		        <input type="text" th:field="*{primerapellido}" placeholder="Primer Apellido" required />
+		        <div th:if="${#fields.hasErrors('primerapellido')}" th:errors="*{primerapellido}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="segundoapellido">Segundo Apellido:</label>
+		        <input type="text" th:field="*{segundoapellido}" placeholder="Segundo Apellido" />
+		        <div th:if="${#fields.hasErrors('segundoapellido')}" th:errors="*{segundoapellido}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="cedula">Cédula:</label>
+		        <input type="text" th:field="*{cedula}" placeholder="Cédula" required />
+		        <div th:if="${#fields.hasErrors('cedula')}" th:errors="*{cedula}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="celular">Celular:</label>
+		        <input type="text" th:field="*{celular}" placeholder="Celular" required />
+		        <div th:if="${#fields.hasErrors('celular')}" th:errors="*{celular}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="usuario">Usuario:</label>
+		        <input type="text" th:field="*{usuario}" placeholder="Usuario" required />
+		        <div th:if="${#fields.hasErrors('usuario')}" th:errors="*{usuario}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="contraseña">Contraseña:</label>
+		        <input type="text" th:field="*{contraseña}" placeholder="Contraseña" required />
+		        <div th:if="${#fields.hasErrors('contraseña')}" th:errors="*{contraseña}" class="error-message"></div>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="tipousuario">Tipo de Usuario:</label>
+		        <select id="tipousuario" th:field="*{tipousuario}" required>
+		            <option value="cliente" th:selected="${cliente.tipousuario == 'cliente'}">Cliente</option>
+		        </select>
+		    </div>
+
+		    <div class="form-group">
+		        <label for="direccion">Dirección:</label>
+		        <input type="text" th:field="*{direccion}" placeholder="Dirección" required />
+		        <div th:if="${#fields.hasErrors('direccion')}" th:errors="*{direccion}" class="error-message"></div>
+		    </div>
+
+		    <button type="submit">Guardar</button>
+		</form>
+
+    </div>
+</body>
+</html>
